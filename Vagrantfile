@@ -29,7 +29,7 @@ Vagrant.configure("2") do |config|
       v.customize ["modifyvm", :id, "--name", "DB"]
     end
     db.vm.provision :ansible do |ansible|
-      ansible.playbook = "tasks/a.yml"
+      ansible.playbook = "tasks/mysql.yml"
    end
   end
 end

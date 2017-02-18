@@ -16,20 +16,34 @@
 
 - replace:
     dest=/etc/vsftpd.conf
-    regexp='anonymous_enable=NO'
-    replace='anonymous_enable=YES'
-
-- replace:
-    dest=/etc/vsftpd.conf
     regexp='#ftpd_banner=Welcome to blah FTP service.'
     replace='ftpd_banner={{FTPBANNER}}'
 
-- name: pam.d for vsftpd 
+- name: pam.d for vsftpd
   blockinfile:
     dest: /etc/pam.d/vsftpd
     block: |
       auth required pam_mysql.so user=vagrant passwd=vagrant host=192.168.80.4 db=vsftpd table=user usercolumn=user passwdcolumn=pass crypt=2
       account required pam_mysql.so user=vagrant passwd=vagrant host=192.168.80.4 db=vsftpd table=user usercolumn=user passwdcolumn=pass crypt=2
+- user:
+    name: vsftpd
+    home: var/www/ftp
+    shell: bin/false
+
+- name: Creates directory
+  file: path=/var/www/ftp/ansible state=directory owner=vsftpd mode=0775 recurse=yes
+
+ - name: mysql on vsftpd
+   blockinfile:
+     dest: /etc/vsftpd.conf
+     block: |
+        nopriv_user=vsftpd
+        pam_service_name=vsftpd
+        guest_enable=YES
+        guest_username=vsftpd
+        local_root=/var/www/ftp/$USER
+        user_sub_token=$USER
+        virtual_use_local_privs=YES
 
 - name: Restarting vsftpd
   service:
@@ -44,4 +58,4 @@
 
 - name: Install Openfire
   apt:
-    deb: /tmp/openfire.deb 
+    deb: /tmp/openfire.deb
