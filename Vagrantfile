@@ -1,4 +1,4 @@
-agrant.configure("2") do |config|
+Vagrant.configure("2") do |config|
   config.vm.define "ftpserver" do |ftpserver|
     ftpserver.vm.box = "ubuntu/trusty64"
     ftpserver.vm.box_url = "https://atlas.hashicorp.com/ubuntu/boxes/trusty64"
