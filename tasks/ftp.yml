@@ -14,7 +14,7 @@
 
 - replace:
     dest=/etc/vsftpd.conf
-    regexp='#ftpd_banner='
+    regexp='#ftpd_banner=Welcome to blah FTP service.'
     replace='ftpd_banner={{FTPBANNER}}'
 
 - name: Restarting vsftpd
@@ -27,4 +27,3 @@
     src: https://www.igniterealtime.org/downloads/download-landing.jsp?file=openfire/openfire_4_1_2.tar.gz
     dest: /opt/
     remote_src: True
-
