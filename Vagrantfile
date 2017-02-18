@@ -1,4 +1,4 @@
-Vagrant.configure("2") do |config|
+agrant.configure("2") do |config|
   config.vm.define "ftpserver" do |ftpserver|
     ftpserver.vm.box = "ubuntu/trusty64"
     ftpserver.vm.box_url = "https://atlas.hashicorp.com/ubuntu/boxes/trusty64"
@@ -12,12 +12,8 @@ Vagrant.configure("2") do |config|
       v.customize ["modifyvm", :id, "--name", "ftpserver"]
     end
     ftpserver.vm.provision :ansible do |ansible|
-      ansible.playbook = "tasks/main.yml"
+      ansible.playbook = "tasks/a.yml"
    end
-   ftpserver.vm.provision "shell", inline: <<-SHELL
-   apt-get update
-   SHELL
- end
   end
 
   config.vm.define "DB" do |db|
@@ -33,11 +29,7 @@ Vagrant.configure("2") do |config|
       v.customize ["modifyvm", :id, "--name", "DB"]
     end
     db.vm.provision :ansible do |ansible|
-      ansible.playbook = "tasks/mysql.yml"
+      ansible.playbook = "tasks/a.yml"
    end
-   db.vm.provision "shell", inline: <<-SHELL
-   apt-get update
-   SHELL
- end
   end
 end

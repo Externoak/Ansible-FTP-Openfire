@@ -1,6 +1,13 @@
 ---
 - hosts: all
   become: true
+
+  vars_prompt:
+
+    - name: "BANNERFTP"
+      prompt: "Enter banner for FTP"
+      private: no
+
   tasks:
         - name: actualizando la cache de apt
           apt: update_cache=yes

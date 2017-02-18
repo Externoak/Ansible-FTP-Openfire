@@ -1,17 +1,30 @@
 - name: Config Languague
   command: locale-gen es_ES.UTF-8
 
-- name: Install FTP
+- name: Installing Packets
   apt: name={{ item }} update_cache=yes state=present
   with_items:
   - vsftpd
+  - openjdk-7-jre
 
 - replace:
     dest=/etc/vsftpd.conf
     regexp='anonymous_enable=NO'
     replace='anonymous_enable=YES'
 
+- replace:
+    dest=/etc/vsftpd.conf
+    regexp='#ftpd_banner='
+    replace='ftpd_banner={{FTPBANNER}}'
+
 - name: Restarting vsftpd
   service:
     name: vsftpd
     state: restarted
+
+
+- unarchive:
+    src: https://www.igniterealtime.org/downloads/download-landing.jsp?file=openfire/openfire_4_1_2.tar.gz
+    dest: /opt/
+    remote_src: True
+

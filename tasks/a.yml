@@ -1,0 +1,6 @@
+---
+- hosts: all
+  become: true
+  tasks:
+        - name: actualizando la cache de apt
+          apt: update_cache=yes
