@@ -1,6 +1,16 @@
 ---
 - hosts: DB
   become: true
+  vars_prompt:
+
+    - name: "TBUSER"
+      prompt: "Enter user name"
+      private: no
+
+    - name: "TBPASS"
+      prompt: "Enter user password"
+      private: no
+
   tasks:
         - name: actualizando la cache de apt
           apt: update_cache=yes
@@ -31,4 +41,4 @@
           command: mysql -u vagrant -pvagrant -D vsftpd -e 'CREATE TABLE user(id int not null auto_increment PRIMARY KEY, user varchar(30) not null,pass varchar(50) not null);'
 
         - name: Create user in database
-          command: mysql -u vagrant -pvagrant -D vsftpd -e 'INSERT INTO user(user,pass) VALUES ("ansible2",password("ansible"));'
+          command: mysql -u vagrant -pvagrant -D vsftpd -e 'INSERT INTO user(user,pass) VALUES ("{{TBUSER}}",password("{{TBPASS}}"));'
