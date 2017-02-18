@@ -1,0 +1,17 @@
+- name: Config Languague
+  command: locale-gen es_ES.UTF-8
+
+- name: Install FTP
+  apt: name={{ item }} update_cache=yes state=present
+  with_items:
+  - vsftpd
+
+- replace:
+    dest=/etc/vsftpd.conf
+    regexp='anonymous_enable=NO'
+    replace='anonymous_enable=YES'
+
+- name: Restarting vsftpd
+  service:
+    name: vsftpd
+    state: restarted
