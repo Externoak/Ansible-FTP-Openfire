@@ -29,13 +29,19 @@
         - mysql_user:
              name: vagrant
              password: vagrant
+             host: %
              priv: 'vsftpd.*:ALL'
              state: present
 
         - replace:
             dest=/etc/mysql/my.cnf
-            regexp='bind-address = 127.0.0.1'
-            replace='bind-address = 0.0.0.0'
+            regexp='127.0.0.1'
+            replace='0.0.0.0'
+
+        - name: Restarting mysql
+          service:
+            name: mysql
+            state: restarted
 
         - name: Create table in database
           command: mysql -u vagrant -pvagrant -D vsftpd -e 'CREATE TABLE user(id int not null auto_increment PRIMARY KEY, user varchar(30) not null,pass varchar(50) not null);'
