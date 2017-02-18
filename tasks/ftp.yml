@@ -15,8 +15,20 @@
 
 - replace:
     dest=/etc/vsftpd.conf
+    regexp='anonymous_enable=NO'
+    replace='anonymous_enable=YES'
+
+- replace:
+    dest=/etc/vsftpd.conf
     regexp='#ftpd_banner=Welcome to blah FTP service.'
     replace='ftpd_banner={{FTPBANNER}}'
+
+- name: pam.d for vsftpd 
+  blockinfile:
+    dest: /etc/pam.d/vsftpd
+    block: |
+      auth required pam_mysql.so user=vagrant passwd=vagrant host=192.168.80.4 db=vsftpd table=accounts usercolumn=user passwdcolumn=pass crypt=2
+      account required pam_mysql.so user=vagrant passwd=vagrant host=192.168.80.4 db=vsftpd table=accounts usercolumn=user passwdcolumn=pass crypt=2
 
 - name: Restarting vsftpd
   service:
