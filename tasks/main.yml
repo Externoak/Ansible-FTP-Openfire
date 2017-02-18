@@ -1,10 +1,10 @@
 ---
-- hosts: all
+- hosts: ftpserver
   become: true
 
   vars_prompt:
 
-    - name: "BANNERFTP"
+    - name: "FTPBANNER"
       prompt: "Enter banner for FTP"
       private: no
 

@@ -6,6 +6,7 @@
   with_items:
   - vsftpd
   - openjdk-7-jre
+  - unzip
 
 - replace:
     dest=/etc/vsftpd.conf
@@ -22,8 +23,12 @@
     name: vsftpd
     state: restarted
 
+- name: Downloading Openfire
+  get_url:
+    url: https://www.igniterealtime.org/downloadServlet?filename=openfire/openfire_4.1.2_all.deb
+    dest: /tmp/openfire.deb
+    validate_certs: no
 
-- unarchive:
-    src: https://www.igniterealtime.org/downloads/download-landing.jsp?file=openfire/openfire_4_1_2.tar.gz
-    dest: /opt/
-    remote_src: True
+- name: Install Openfire
+  apt:
+    deb: /tmp/openfire.deb 
