@@ -1,0 +1,34 @@
+---
+- hosts: DB
+  become: true
+  tasks:
+        - name: actualizando la cache de apt
+          apt: update_cache=yes
+
+        - name: Installing Packets
+          apt: name={{ item }} update_cache=yes state=present
+          with_items:
+          - mysql-server
+          - python-mysqldb
+
+        - name: Creating database
+          mysql_db:
+            name: vsftpd
+            state: present
+
+        - mysql_user:
+             name: vagrant
+             password: vagrant
+             priv: 'vsftpd.*:ALL'
+             state: present
+
+        - replace:
+            dest=/etc/mysql/my.cnf
+            regexp='bind-address = 127.0.0.1'
+            replace='bind-address = 0.0.0.0'
+
+        - name: Create table in database
+          command: mysql -u vagrant -pvagrant -D vsftpd -e 'CREATE TABLE user(id int not null auto_increment PRIMARY KEY, user varchar(30) not null,pass varchar(50) not null);'
+
+        - name: Create user in database
+          command: mysql -u vagrant -pvagrant -D vsftpd -e 'INSERT INTO user(user,pass) VALUES ("ansible2",password("ansible"));'
