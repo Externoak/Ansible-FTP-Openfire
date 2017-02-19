@@ -26,5 +26,7 @@
 
   tasks:
 
-   - include: openldap.yml
    - include: ldapuser.yml
+
+  roles:
+   - { role: kbrebanov.openldap }

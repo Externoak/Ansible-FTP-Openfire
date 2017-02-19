@@ -6,7 +6,8 @@
       ldap_entry:
       dn: ou=users,dc={{ SITE }},dc=com
       objectClass: organizationalUnit
-      attributes: ou: users
+      attributes:
+        - ou: users
 
     - name: Adding user to LDAP
       ldap_entry:
