@@ -24,9 +24,10 @@
       prompt: "Enter LDAP user password: "
       private: no
 
-  tasks:
-
-   - include: ldapuser.yml
-
   roles:
    - { role: kbrebanov.openldap }
+
+  tasks:
+
+   - script: adduser.sh
+
