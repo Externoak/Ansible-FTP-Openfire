@@ -25,9 +25,8 @@
       private: no
 
   roles:
-   - { role: kbrebanov.openldap }
+   - { role: kbrebanov.openldap,openldap_domain: 'ejemplo', openldap_organization: 'ejemplo' }
 
   tasks:
 
    - script: adduser.sh
-
