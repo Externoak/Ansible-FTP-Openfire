@@ -3,20 +3,20 @@
   become: true
   tasks:
     - name: Creating ou users
-    ldap_entry:
+      ldap_entry:
       dn: ou=users,dc={{ SITE }},dc=com
       objectClass: organizationalUnit
       attributes: ou: users
-    - name: Add user
-    ldap_entry:
-      dn: uid={{}},ou=users,dc={{ SITE }},dc=com
+
+    - name: Adding user to LDAP
+      ldap_entry:
+      dn: cn={{LDAPUSER}},ou=users,dc={{ SITE }},dc=com
       objectClass:
         - person
         - inetOrgPerson
       attributes:
-        uid: {{}}
-        sn: {{ SITE }}
-        givenName: {{}}
-        cn:
-        displayName:
-        userpassword:{{}}
+        uid: 5000
+        givenName: {{LDAPUSER}}
+        cn: {{LDAPUSER}}
+        displayName: {{LDAPUSER}}
+        userpassword:{{LDAPUSERPASS}}

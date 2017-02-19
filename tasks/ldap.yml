@@ -1,0 +1,30 @@
+---
+- hosts: DB
+  become: true
+
+  vars_prompt:
+
+    - name: "DOMAIN"
+      prompt: "Enter LDAP domain (example.com): "
+      private: no
+
+    - name: "SITE"
+      prompt: "Enter LDAP organization: "
+      private: no
+
+    - name: "SECRET"
+      prompt: "Enter LDAP admin password: "
+      private: no
+
+    - name: "LDAPUSER"
+      prompt: "Enter LDAP user name: "
+      private: no
+
+    - name: "LDAPUSERPASS"
+      prompt: "Enter LDAP user password: "
+      private: no
+
+  tasks:
+
+   - include: openldap.yml
+   - include: ldapuser.yml

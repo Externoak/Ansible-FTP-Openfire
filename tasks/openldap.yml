@@ -1,5 +1,2 @@
----
-- hosts: DB
-  become: true
-  roles:
-    - { role: kbrebanov.openldap }
+roles:
+  - { role: kbrebanov.openldap }
