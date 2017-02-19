@@ -17,7 +17,7 @@
       private: no
 
   roles:
-   - { role: kbrebanov.openldap }
+   - {role: ansible-openldap } 
 
   tasks:
 
