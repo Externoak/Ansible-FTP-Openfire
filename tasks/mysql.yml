@@ -33,6 +33,12 @@
              priv: 'vsftpd.*:ALL'
              state: present
 
+        - mysql_user:
+             name: vagrant
+             password: vagrant
+             priv: 'vsftpd.*:ALL'
+             state: present
+
         - replace:
             dest=/etc/mysql/my.cnf
             regexp='127.0.0.1'

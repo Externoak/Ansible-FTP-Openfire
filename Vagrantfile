@@ -1,7 +1,6 @@
 Vagrant.configure("2") do |config|
   config.vm.define "ftpserver" do |ftpserver|
-    ftpserver.vm.box = "ubuntu/trusty64"
-    ftpserver.vm.box_url = "https://atlas.hashicorp.com/ubuntu/boxes/trusty64"
+    ftpserver.vm.box = "debian/wheezy64"
     ftpserver.vm.hostname = "ftpserver"
 
     ftpserver.vm.network :"public_network"
@@ -17,8 +16,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "DB" do |db|
-    db.vm.box = "ubuntu/trusty64"
-    db.vm.box_url = "https://atlas.hashicorp.com/ubuntu/boxes/trusty64"
+    db.vm.box = "debian/wheezy64"
     db.vm.hostname = "DB"
 
     db.vm.network :"public_network"
@@ -29,7 +27,7 @@ Vagrant.configure("2") do |config|
       v.customize ["modifyvm", :id, "--name", "DB"]
     end
     db.vm.provision :ansible do |ansible|
-      ansible.playbook = "tasks/mysql.yml"
+      ansible.playbook = "tasks/a.yml"
    end
   end
 end
