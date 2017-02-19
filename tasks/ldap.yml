@@ -16,18 +16,10 @@
       prompt: "Enter LDAP admin password: "
       private: no
 
-    - name: "LDAPUSER"
-      prompt: "Enter LDAP user name: "
-      private: no
-
-    - name: "LDAPUSERPASS"
-      prompt: "Enter LDAP user password: "
-      private: no
-
   roles:
    - { role: kbrebanov.openldap }
 
   tasks:
 
-   - script: adduser.sh
+#   - script: adduser.sh
 
