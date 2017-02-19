@@ -30,18 +30,18 @@ Vagrant.configure("2") do |config|
       ansible.playbook = "tasks/a.yml"
    end
   end
-  config.vm.define "LDAP" do |ldap|
-    ldap.vm.box = "Ubuntu/trusty64"
-    ldap.vm.hostname = "ldap"
+  config.vm.define "LDAP" do |LDAP|
+    LDAP.vm.box = "Ubuntu/trusty64"
+    LDAP.vm.hostname = "LDAP"
 
-    ldap.vm.network :"public_network"
-    ldap.vm.network "private_network", ip: "192.168.80.5"
+    LDAP.vm.network :"public_network"
+    LDAP.vm.network "private_network", ip: "192.168.80.5"
 
-   ldap.vm.provider :virtualbox do |v|
+   LDAP.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--memory", 512]
-      v.customize ["modifyvm", :id, "--name", "ldap"]
+      v.customize ["modifyvm", :id, "--name", "LDAP"]
     end
-    ldap.vm.provision :ansible do |ansible|
+    LDAP.vm.provision :ansible do |ansible|
       ansible.playbook = "tasks/a.yml"
    end
   end

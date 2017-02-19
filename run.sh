@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Downloading dependencies"
-git clone https://github.com/kbrebanov/ansible-openldap.git
+git clone https://github.com/juancarloscruz/ansible-openldap.git
 mv ansible-openldap/ tasks/roles/
 echo "Iniciando"
 vagrant up --no-provision

@@ -1,5 +1,5 @@
 ---
-- hosts: DB
+- hosts: LDAP
   become: true
 
   vars_prompt:
