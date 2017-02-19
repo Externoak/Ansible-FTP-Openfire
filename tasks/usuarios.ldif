@@ -1,0 +1,22 @@
+##Unidad organizativa
+
+dn: ou=usuarios,dc=bautistasantos,dc=com
+objectClass: organizationalUnit
+ou: usuarios
+
+##Usuario
+dn: uid=Prueba,ou=usuarios,dc=bautistasantos,dc=com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: Prueba
+sn: bautistasantos
+givenName: Prueba
+cn: Prueba bautistasantos
+displayName: Prueba bautistasantos
+uidNumber: 100000
+gidNumber: 5000
+userPassword: Prueba
+gecos: Prueba bautistasantos
+loginShell: /bin/bash
+homeDirectory: /home/usuarios/Prueba
