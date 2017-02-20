@@ -31,7 +31,7 @@ Vagrant.configure("2") do |config|
    end
   end
   config.vm.define "ldap" do |ldap|
-    ldap.vm.box = "Ubuntu/trusty64"
+    ldap.vm.box = "ubuntu/trusty64"
     ldap.vm.hostname = "ldap"
 
     ldap.vm.network :"public_network"
