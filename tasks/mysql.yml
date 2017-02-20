@@ -4,7 +4,7 @@
   vars_prompt:
 
     - name: "TBUSER"
-      prompt: "Enter user name"
+      prompt: "Enter user name for mysql table"
       private: no
 
     - name: "TBPASS"

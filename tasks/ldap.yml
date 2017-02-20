@@ -5,7 +5,7 @@
   vars_prompt:
 
     - name: "PASS"
-      prompt: "Enter LDAP admin password: "
+      prompt: "Enter LDAP admin password (MUST BE THE SAME AS BEFORE!): "
       private: no
 
     - name: "USER"

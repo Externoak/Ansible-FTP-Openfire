@@ -9,11 +9,23 @@
   - mysql-client
   - unzip
   - libpam-mysql
+  - libnss-ldap
+
+- replace:
+    dest=/etc/ldap/ldap.conf
+    regexp='#BASE   dc=example,dc=com'
+    replace='BASE    dc=nodomain'
+
+- replace:
+    dest=/etc/ldap/ldap.conf
+    regexp='#URI    ldap://ldap.example.com ldap://ldap-master.example.com:666'
+    replace='URI     ldap://192.168.80.5:389'
 
 - replace:
     dest=/etc/vsftpd.conf
     regexp='#local_enable=YES'
     replace='local_enable=YES'
+
 - replace:
     dest=/etc/vsftpd.conf
     regexp='#write_enable=YES'
@@ -36,8 +48,28 @@
   blockinfile:
     dest: /etc/pam.d/vsftpd
     block: |
-      auth required pam_mysql.so user=vagrant passwd=vagrant host=192.168.80.4 db=vsftpd table=user usercolumn=user passwdcolumn=pass crypt=2
-      account required pam_mysql.so user=vagrant passwd=vagrant host=192.168.80.4 db=vsftpd table=user usercolumn=user passwdcolumn=pass crypt=2
+      session required pam_limits.so
+      account required pam_permit.so
+      auth required pam_ldap.so
+
+- file:
+    path: /etc/pam_ldap.conf
+    state: absent
+
+- file:
+    path: /etc/pam_ldap.conf
+    state: touch
+
+
+- name: ldap.conf
+  blockinfile:
+    dest: /etc/pam_ldap.conf
+    block: |
+      base dc=nodomain
+      uri ldap://192.168.80.5:389
+      ldap_version 3
+      binddn cn=admin,dc=nodomain
+      bindpw {{LDAPPASS}}
 
 - file:
     path: /var/www
