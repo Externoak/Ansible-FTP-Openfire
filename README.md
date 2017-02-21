@@ -2,7 +2,7 @@
 
 ![alt tag](http://i.imgur.com/hBQ3rjP.png)
 
-Vagrant with Ansible to create 3 virtual machines with vsftpd + Openfire and Mysql + LDAP on remote hosts. All machines are connect through an internal network although each machine has a public IP address assigned by DHCP.
+Vagrant with Ansible to create 3 virtual machines with vsftpd + openfire and MySQL + LDAP on remote hosts. All machines are connected through an internal network although each machine has a public IP address assigned by DHCP.
 
 During the installation ansible will prompt a series of variables for futher customization.
 
