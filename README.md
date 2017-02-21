@@ -2,9 +2,9 @@
 
 ![alt tag](http://i.imgur.com/hBQ3rjP.png)
 
-Vagrant with Ansible to create 3 virtual machines with vsftpd + Openfire and Mysql + LDAP on remote hosts. All machines are connect through an internal network although each machine has a public IP address asigned by DHCP.
+Vagrant with Ansible to create 3 virtual machines with vsftpd + Openfire and Mysql + LDAP on remote hosts. All machines are connect through an internal network although each machine has a public IP address assigned by DHCP.
 
-During the instalation ansible will prompt a series of variables for futher customization.
+During the installation ansible will prompt a series of variables for futher customization.
 
 # How to run:
 
@@ -13,3 +13,13 @@ During the instalation ansible will prompt a series of variables for futher cust
           cd Ansible-FTP-Openfire/
           
           sh run.sh
+          
+          The password for root or admin that is not especified by any variable is "vagrant"
+          
+          LDAP domain: dc=nodomain
+          To access LDAP server from remote client use the IP assinged by DHCP and cn=admin,dc=nodomain. 
+          Password to LDAP admin will be the one specified by the user during installation.
+          
+
+By default vsftpd will only be allowing login to users registered at LDAP server.
+
